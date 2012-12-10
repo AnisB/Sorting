@@ -27,50 +27,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Algorithme recursif de quick sort 
-void qSort(int * list, int left, int right)
+
+void display(int * liste, int size)
 {
-  int pivot, lHold, rHold;
- 
-  lHold = left;
-  rHold = right;
-  pivot = list[left];
-  while (left < right)
-  {
-    while ((list[right] >= pivot) && (left < right))
-      right--;
-    if (left != right)
-    {
-      list[left] = list[right];
-      left++;
-    }
-    while ((list[left] <= pivot) && (left < right))
-      left++;
-    if (left != right)
-    {
-      list[right] = list[left];
-      right--;
-    }
-  }
-  list[left] = pivot;
-  pivot = left;
-  left = lHold;
-  right = rHold;
-  
-  
-  if (left < pivot)
-    qSort(list, left, pivot-1);
-    
-  if (right > pivot)
-    qSort(list, pivot+1, right);
+		for(int i=0;i<size;i++)
+			printf("%d ",liste[i]);
+		printf("\n");
+
+}
+void entasser(int * liste,int first, int second)
+{
+	int k =first;
+	int j=(2*k);
+	while(j<=second)
+	{
+		if((j<second) && (liste[j]<liste[j+1]))
+			j++;
+			
+		if (liste[k]<liste[j])
+		{
+			int temp = liste[j];
+			liste[j]=liste[k];
+			liste[k]=temp;
+			k=j;
+      		j=2*k;
+		}
+		else
+			return;
+	}
 }
 
-// Appel de l'algorithme
-void quickSort(int * list, int size)
-{
-  qSort(list, 0, size - 1);
-}
 
+void triTas(int * liste, int size)
+{
+	for(int i=(size/2);i!=-1;i--)
+	{
+		entasser(liste,i,size-1);
+	}
+	for(int i=(size-1);i!=0;i--)
+	{
+		int temp = liste[0];
+		liste[0]=liste[i];
+		liste[i]=temp;
+		entasser(liste,0,i-1);
+	}
+}
 
 int main()
 {
@@ -92,12 +93,7 @@ int main()
 	{
 		list2[10-i-1]=list[i];
 	}	
-	for(int i=0;i<10;i++)
-		printf("%d ",list2[i]);
-	printf("\n");
-	quickSort(list2,10);
-	for(int i=0;i<10;i++)
-		printf("%d ",list2[i]);
-	printf("\n");
+	display(list2,10);
+	triTas(list2,10);
+	display(list2,10);
 }
- 

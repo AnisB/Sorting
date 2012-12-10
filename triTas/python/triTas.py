@@ -25,59 +25,48 @@
 #
  	
 
-# Fonction de fusion
-def fusion(list1,list2):
-	total = list1+list2
-	temp=total[:]
-	base =len(list1)
-	top =len(temp)	
-	for i in range(base, top):
-		temp[i]=0
+# Fonction d'entassage
+def entasser(liste,first,second):
+	k=first
+	j = 2*k
+	while j<=second:
+		if (j<second )and (liste[j]<liste[j+1]):
+			j=j+1
+		if liste[k] < liste[j]:
+			temp = liste[j]
+			liste[j]=liste[k]
+			liste[k]=temp
+			k=j
+			j=2*k
+		else:
+			return liste
+	return liste
 
-	z = base
-	countera = 0
-	counterb = base 
-	for i in range(0, top):
-		if countera==z :
-			break
-		elif counterb==(top) :
-			total[i] = temp[countera]
-			countera = countera+1
-		elif temp[countera-0]<total[counterb] :
-			total[i] = temp[countera]
-			countera = countera+1
-		else :
-			total[i] = total[counterb]
-			counterb = counterb+1
-	return total
-    
-    
-#Fonction de division    	
-def divide(listX):
-    if len(listX)>1 :
-		a = listX[:len(listX)/2]
-		b = listX[len(listX)/2 :]
-		a=divide(a)
-		b=divide(b)
-		result = fusion(a,b)
-		return result
-    else:
-    	return listX
-    	
 
 
 # Appel global
-def triFusion(A):
-    if len(A)> 0 :
-    	return divide(A)
-    	
+def triTas(A):
+	limit = (len(A)/2) 
+	for i in xrange(limit,-1,-1):
+		A=entasser(A,i,len(A)-1)
+
+	for i in xrange(len(A)-1,0,-1):
+		temp = A[0]
+		A[0]=A[i]
+		A[i]=temp
+		A=entasser(A,0,i-1)
+	return A    	
 	    	
 	    
 # Exemples	    	
 local = [1,4,29,3,6]
-local = triFusion(local)
+local = triTas(local)
+print(local)
+
+local = [10,9,8,7,6]
+local = triTas(local)
 print(local)
 
 local = [90,4,29,3,6,122,2,1,9]
-local = triFusion(local)
+local = triTas(local)
 print(local)

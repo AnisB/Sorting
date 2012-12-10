@@ -1,8 +1,8 @@
  
 #
-  # Ce document est la proprité d'Anis Benyoub, c'est une implémentation 
-  # d'un algorithme de tri sur un tableau d'élement, ces algorithmes sont 
-  # implémentés dans différents langages C, python,lua, etc.
+  # Ce document est la proprite d Anis Benyoub, c est une implementation 
+  # d'un algorithme de tri sur un tableau delement, ces algorithmes sont 
+  # implementes dans differents langages C, python,lua, etc.
   # @see https://auzaiffe.alwaysdata.net
   # @author 2012-2013 Anis Benyoub <benyoub.anis@gmail>
   # @see The GNU Public License (GPL)
@@ -23,8 +23,7 @@
  # with this program; if not, write to the Free Software Foundation, Inc.,
  # 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
- 
- 
+ 	
  
 #Algorithme de quick sort
 def quickSort(L):
@@ -61,7 +60,6 @@ def quickSort(L):
 	return result 
 	
 	    	
-
 
 # Exemple	    	
 local = [1,4,29,3 ,88, 2, 100, 150, 5]
